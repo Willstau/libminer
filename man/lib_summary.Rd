@@ -7,7 +7,7 @@
 lib_summary(sizes = FALSE)
 }
 \arguments{
-\item{sizes}{}
+\item{sizes}{A parameter}
 }
 \value{
 A data.frame containing the count of packages in each of the user's

@@ -2,7 +2,7 @@
 #'
 #' WillStau. Provides a brief summary of the package libraries on your machine.
 #'
-#' @param sizes
+#' @param sizes A parameter
 #'
 #' @return A data.frame containing the count of packages in each of the user's
 #'   libraries
@@ -17,12 +17,9 @@ lib_summary <- function(sizes = FALSE) {
   names(pkg_df) <- c("Library", "n_packages")
 
   if (sizes) {
-    pkg_df$lib_size <- vapply(
+    pkg_df$lib_size <- map_dbl(
       pkg_df$Library,
-      function(x) {
-        sum(fs::file_size(fs::dir_ls(x, recurse = TRUE)))
-      },
-      FUN.VALUE = numeric(1)
+      ~ sum(fs::file_size(fs::dir_ls(.x, recurse = TRUE)))
     )
   }
   pkg_df
